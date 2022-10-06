@@ -1,21 +1,30 @@
 'use strict';
 
 const moviesEl = document.querySelector('#movies');
+let seatCount = 0;
+let moviePrice = moviesEl.value;
 
-const seats = document.querySelectorAll('.row .seat:not(.occupied)');
-
-// console.log(seats);
 
 const countEl = document.querySelector('#count');
 const totalEl = document.querySelector('#total');
+const screenContainerEl = document.querySelector('.screen-container');
 
-// console.log(countEl);
-// console.log(totalEl);
+screenContainerEl.addEventListener('click', function (e) {
+    if(e.target.classList.contains('seat')) {
+        if(e.target.classList.contains('occupied')) {
+        } else {
+            e.target.classList.toggle('selected');
+            const seatCountArr = document.querySelectorAll('.row .seat.selected');
+            seatCount = seatCountArr.length;
+        }
 
-let moviePrice = moviesEl.value;
-// console.log(moviePrice);
+        countEl.innerText = seatCount;
+        totalEl.innerText = seatCount * moviePrice;
+    }
+});
+
+
 
 moviesEl.addEventListener('change', function() {
     moviePrice = moviesEl.value;
-    console.log(moviePrice);
 });
